@@ -1,2 +1,2 @@
-# wompuswithradha
-a whompus game made in java :)
+# wimpuswithradha
+a *wumpus* game made in java :)
