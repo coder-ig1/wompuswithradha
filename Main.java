@@ -1,11 +1,12 @@
 public class Main
 {
+  private static boolean gameOn = true;
   public static void main(String[] args)
   {
     //put code here
-    System.out.println("testing");
-    CaveSystem caveSystem = new CaveSystem();
-    Player player = new Player(caveSystem, 0);
+    while(gameOn){
+      
+    }
     
   }
 }
