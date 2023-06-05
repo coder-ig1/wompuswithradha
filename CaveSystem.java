@@ -1,22 +1,40 @@
 public class CaveSystem {
     Cave[] caves;
+    int wumpusLoc;
+    int bat1Loc;
+    int bat2Loc;
+    int pit1Loc;
+    int pit2Loc;
+
     public CaveSystem() {
         fillCaves();
         setUpCaveConnections();
         setUpCaveProperties();
     }
-    private void setUpCaveProperties(){
-        //implement radha pls
+
+    public boolean emptyCave(Cave cave) {
+        //RADHA TO IMPLEMENT
     }
+
+    private void setUpCaveSystemProperties(){
+
+        //RADHA TO IMPLEMENT
+        //2 abysses/pits
+        //1 wumpus
+        //2 bats
+    }
+
     public Cave accessCave(int caveNumber) {
         return caves[caveNumber];
     }
+
     private void fillCaves(){
         caves = new Cave[20];
         for (int i = 0; i < 20; i++) {
             caves[i].setCaveSystem(this);
         }
     }
+
     private void setUpCaveConnections(){
         caves[0].setLinkedCaves(1, 4, 7);
         caves[1].setLinkedCaves(0, 2, 9);
