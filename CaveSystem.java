@@ -1,5 +1,5 @@
 public class CaveSystem {
-    Cave[] caves;
+    public Cave[] caves;
     int wumpusLoc;
     int[] pits;
     int[] bats;
