@@ -1,12 +1,14 @@
 public class Cave {
     Cave[] linkedCaves = new Cave[3];
     CaveSystem caveSystem;
+    int cavenum;
 
-    public Cave(int caveNumber, int caveNumber2, int caveNumber3, CaveSystem caveSystem) {
+    public Cave(int caveNumber, int caveNumber2, int caveNumber3, CaveSystem caveSystem int thisCaveNum) {
         linkedCaves[0] = caveSystem.accessCave(caveNumber);
         linkedCaves[1] = caveSystem.accessCave(caveNumber2);
         linkedCaves[2] = caveSystem.accessCave(caveNumber3);
         this.caveSystem = caveSystem;
+        cavenum = thisCaveNum;
     }
 
     public Cave(){
@@ -24,5 +26,9 @@ public class Cave {
     
     public void setCaveSystem(CaveSystem caveSystem) {
         this.caveSystem = caveSystem;
+    }
+    @Override 
+    public String toString(){
+
     }
 }
