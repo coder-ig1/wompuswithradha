@@ -1,25 +1,43 @@
 public class CaveSystem {
     public Cave[] caves;
-    int wumpusLoc;
-    int[] pits;
-    int[] bats;
+    Cave wumpusLoc;
+    Cave[] pits;
+    Cave[] bats;
 
     public CaveSystem() {
         fillCaves();
         setUpCaveConnections();
-        setUpCaveProperties();
+        setUpCaveSystemProperties();
     }
 
     public boolean emptyCave(int loc) {
-        return loc != wumpusLoc && loc != pits[0] && loc != pits[1] && loc != bats[0] && loc != bats[1];
+        //return loc != wumpusLoc && loc != pits[0] && loc != pits[1] && loc != bats[0] && loc != bats[1];
+        return true;
     }
 
     private void setUpCaveSystemProperties(){
 
-        //RADHA TO IMPLEMENT
-        //2 abysses/pits
-        //1 wumpus
-        //2 bats
+        int rand = (int) (Math.random()*20);
+
+        wumpusLoc = accessCave(rand);
+        pits = new Cave[2];
+        bats = new Cave[2];
+
+        while(rand != wumpusLoc.getCaveNum()) {
+            pits[0] = accessCave(rand);
+        }
+
+        while (rand != wumpusLoc.getCaveNum() && rand != pits[0].getCaveNum()) {
+            pits[1] = accessCave(rand);
+        }
+
+        while (rand != wumpusLoc.getCaveNum() && rand != pits[0].getCaveNum() && rand != pits[1].getCaveNum()) {
+            bats[0] = accessCave(rand);
+        }
+
+        while (rand != wumpusLoc.getCaveNum() && rand != pits[0].getCaveNum() && rand != pits[1].getCaveNum() && rand != bats[0].getCaveNum()) {
+            bats[1] = accessCave(rand);
+        }
     }
 
     public Cave accessCave(int caveNumber) {

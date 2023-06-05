@@ -17,12 +17,13 @@ public class Main
     Scanner takeInput = new Scanner(System.in);
     System.out.println("you are in cave ")
   }
+  
   public Cave findEmptyCave(CaveSystem caves){
     for(int i = 0; i <caves.caves.length; i++ ){
       if(caves.emptyCave(caves.accessCave(i))){
         return caves.accessCave(i);
       }
     }
-    return null;//under regular circumstances this will never be ran 
+    return null; //under regular circumstances this will never be ran 
   }
 }
