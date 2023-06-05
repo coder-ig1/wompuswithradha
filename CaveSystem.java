@@ -38,7 +38,7 @@ public class CaveSystem {
         caves[17].setLinkedCaves(8, 16, 18);
         caves[18].setLinkedCaves(10, 17, 19);
         caves[19].setLinkedCaves(12, 15, 18);
-    }
+    }  
 }
 
 
