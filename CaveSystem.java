@@ -1,10 +1,8 @@
 public class CaveSystem {
     Cave[] caves;
     int wumpusLoc;
-    int bat1Loc;
-    int bat2Loc;
-    int pit1Loc;
-    int pit2Loc;
+    int[] pits;
+    int[] bats;
 
     public CaveSystem() {
         fillCaves();
@@ -12,8 +10,8 @@ public class CaveSystem {
         setUpCaveProperties();
     }
 
-    public boolean emptyCave(Cave cave) {
-        //RADHA TO IMPLEMENT
+    public boolean emptyCave(int loc) {
+        return loc != wumpusLoc && loc != pits[0] && loc != pits[1] && loc != bats[0] && loc != bats[1];
     }
 
     private void setUpCaveSystemProperties(){
@@ -56,7 +54,7 @@ public class CaveSystem {
         caves[17].setLinkedCaves(8, 16, 18);
         caves[18].setLinkedCaves(10, 17, 19);
         caves[19].setLinkedCaves(12, 15, 18);
-    }  
+    }
 }
 
 

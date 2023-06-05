@@ -1,11 +1,51 @@
 public class Player {
     CaveSystem caveSystem;
-    int currentCave;
-    
-    public Player(CaveSystem caveSystem, int currentCave) {
+    Cave currentCave;
+    int arrows;
+    boolean alive;
+
+    public Player(CaveSystem caveSystem, Cave currentCave, int arrows, boolean alive) {
         this.caveSystem = caveSystem;
         this.currentCave = currentCave;
+        this.arrows = 5;
+        this.alive = true;
+
+        int playerLoc = (int) (Math.random() * 20);
+        while (!caveSystem.emptyCave(playerLoc)) {
+            playerLoc = (int) (Math.random() * 20);
+        }
+
+        currentCave = caveSystem.accessCave(playerLoc);
     }
+
+    public void shootArrow(int roomLoc) {
+        if (arrows > 0) {
+            arrows--;
+            // if room location contains Wumpus
+            if (caveSystem.wumpusLoc == roomLoc) {
+                System.out.println("You killed the Wumpus! You win!");
+            }
+
+            // ran out of arrows and Wumpus still alive
+            else if (arrows == 0) {
+                alive = false;
+                System.out.println("You ran out of arrows. Game over ☠☠☠");
+            }
+
+            // if room location contains a bat
+            else if (roomLoc == caveSystem.bats[0] || roomLoc == caveSystem.bats[1]) {
+                System.out.println("You killed a bat!");
+                if (roomLoc == caveSystem.bats[0]) {
+                    caveSystem.bats[0] = -1;
+                } else {
+                    caveSystem.bats[1] = -1;
+                }
+            }
+            
+        }
+    }
+
+
 }
 
 /*
