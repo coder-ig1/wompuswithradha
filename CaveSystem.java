@@ -1,11 +1,23 @@
 public class CaveSystem {
     Cave[] caves;
     public CaveSystem() {
+        fillCaves();
+        setUpCaveConnections();
+        setUpCaveProperties();
+    }
+    private void setUpCaveProperties(){
+        //implement radha pls
+    }
+    public Cave accessCave(int caveNumber) {
+        return caves[caveNumber];
+    }
+    private void fillCaves(){
         caves = new Cave[20];
         for (int i = 0; i < 20; i++) {
             caves[i].setCaveSystem(this);
         }
-        
+    }
+    private void setUpCaveConnections(){
         caves[0].setLinkedCaves(1, 4, 7);
         caves[1].setLinkedCaves(0, 2, 9);
         caves[2].setLinkedCaves(1, 3, 11);
@@ -26,10 +38,6 @@ public class CaveSystem {
         caves[17].setLinkedCaves(8, 16, 18);
         caves[18].setLinkedCaves(10, 17, 19);
         caves[19].setLinkedCaves(12, 15, 18);
-    }
-
-    public Cave accessCave(int caveNumber) {
-        return caves[caveNumber];
     }
 }
 
