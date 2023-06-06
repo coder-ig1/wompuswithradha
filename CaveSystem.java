@@ -13,11 +13,11 @@ public class CaveSystem {
     }
 
     public boolean emptyCave(int loc) {
-        if(wumpusLoc.getCaveNum() == loc||
-             (!(bats[0] ==null )&& bats[0].getCaveNum() == loc|| 
-             (!(bats[1] ==null )&& bats[1].getCaveNum() == loc)||
-             (!(pits[0] ==null )&& pits[0].getCaveNum() == loc||
-             (!(pits[1] ==null )&& pits[1].getCaveNum() == loc)))){
+        if(wumpusLoc.getCaveNum() == loc ||
+             (!(bats[0] == null )&& bats[0].getCaveNum() == loc) || 
+             (!(bats[1] == null )&& bats[1].getCaveNum() == loc) ||
+             (!(pits[0] == null )&& pits[0].getCaveNum() == loc) ||
+             (!(pits[1] == null )&& pits[1].getCaveNum() == loc)){
             return false;
         }
         return true;
@@ -26,25 +26,29 @@ public class CaveSystem {
     private void setUpCaveSystemProperties(){
 
         wumpusLoc = caves[(int) (Math.random() * 20)];
-        //fill random caves with pits and bats such that they dont overlap
+        //fill random caves with pits and bats such that they don't overlap
         pits = new Cave[2];
         boolean tempbool = true;
         while(tempbool){
             int tempRan1 = (int) (Math.random() * 20);
             int tempRan2 = (int) (Math.random() * 20);
             tempbool = true;
-            if(tempRan1 != tempRan2&& emptyCave(tempRan1) && emptyCave(tempRan2)){
+
+            if(tempRan1 != tempRan2 && emptyCave(tempRan1) && emptyCave(tempRan2)){
                 pits[0] = caves[tempRan1];
                 pits[1] = caves[tempRan2];
                 tempbool = false;
             }
         }
+
         bats = new Cave[2];
         tempbool = true;
-        while(tempbool){
+
+        while(tempbool) {
             int tempRan1 = (int) (Math.random() * 20);
             int tempRan2 = (int) (Math.random() * 20);
             tempbool = true;
+
             if(tempRan1 != tempRan2&& emptyCave(tempRan1) && emptyCave(tempRan2)){
                 bats[0] = caves[tempRan1];
                 bats[1] = caves[tempRan2];
@@ -63,6 +67,7 @@ public class CaveSystem {
             caves[i] = new Cave();
             caves[i].setCaveSystem(this);
         }
+
         for (int i = 0; i < 20; i++) {
             caves[i].setCaveNum(i);
         }

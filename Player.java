@@ -16,11 +16,14 @@ public class Player {
 
         currentCave = caveSystem.accessCave(playerLoc);
     }
+    
     public void setRandomValidPLayerLoc(){
         int playerLoc = (int) (Math.random() * 20);
+
         while (!caveSystem.emptyCave(playerLoc)) {
             playerLoc = (int) (Math.random() * 20);
         }
+
         currentCave = caveSystem.accessCave(playerLoc);
     }
 
@@ -81,7 +84,8 @@ public class Player {
 
                 if (shotInto.equals(caveSystem.bats[0])) {
                     caveSystem.bats[0] = null;
-                } else {
+                }
+                else {
                     caveSystem.bats[1] = null;
                 }
             }
@@ -89,8 +93,6 @@ public class Player {
              else {
                 System.out.println("You missed the Wumpus! It woke up and moved to a random room.");
                 caveSystem.randomWumpus();
-                
-                //WHOOPS NEED TO DO THIS
             } 
     
             System.out.println();
@@ -103,8 +105,6 @@ public class Player {
         currentCave = moveTo;
         return checkStatus();
     }
-
-    
 
     private boolean checkStatus() {
         if (currentCave.equals(caveSystem.wumpusLoc)) {
@@ -124,9 +124,6 @@ public class Player {
             System.exit(0);
         }
             
-
-                return true;
-            
+        return true;
     }
-
 }
