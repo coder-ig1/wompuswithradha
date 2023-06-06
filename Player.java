@@ -125,7 +125,7 @@ public class Player {
         }
             
 
-                return true;
+        return true;
             
     }
      public Cave getCurrentCave(){
