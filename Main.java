@@ -3,24 +3,51 @@ import java.util.Scanner;
 public class Main
 {
   private static boolean gameOn = true;
+  private static CaveSystem cavesystem = new CaveSystem();
+  private static Player player = new Player(cavesystem,findEmptyCave(cavesystem));
   public static void main(String[] args)
   {
-    CaveSystem cavesystem = new CaveSystem()
-    Player player = new Player(cavesystem,findEmptyCave(cavesystem));
     //put code here
     while(gameOn){
-      promptForMove()
+      String resultOfPrompt = promptForMove();
+      doMove(resultOfPrompt);
     }
     
   }
-  private void promptForMove(){
+  private static void doMove(String resultOfPrompt){
     Scanner takeInput = new Scanner(System.in);
-    System.out.println("you are in cave ")
+    if(resultOfPrompt.equals("1")){
+      System.out.println("Which room would you like to move to?");
+      String input2 = takeInput.nextLine();
+      int roomNum = Integer.parseInt(input2);
+      player.move(roomNum);
+    }
+    else if(resultOfPrompt.equals("2")){
+      System.out.println("Which room would you like to shoot into?");
+      String input2 = takeInput.nextLine();
+      int roomNum = Integer.parseInt(input2);
+      player.shootArrow(roomNum);
+    }
+    else{
+      System.out.println("Invalid input");
+    }
+    takeInput.close();
+  }
+  private static String promptForMove(){
+    Scanner takeInput = new Scanner(System.in);
+    System.out.println("you are in cave");
+    player.printRoomInfo();
+    System.out.println("What would you like to do?");
+    System.out.print("1. Move,");
+    System.out.println("2. Shoot");
+    String input = takeInput.nextLine();
+    takeInput.close();
+    return input;
   }
   
-  public Cave findEmptyCave(CaveSystem caves){
+  public static Cave findEmptyCave(CaveSystem caves){
     for(int i = 0; i <caves.caves.length; i++ ){
-      if(caves.emptyCave(caves.accessCave(i))){
+      if(caves.emptyCave(i)){
         return caves.accessCave(i);
       }
     }

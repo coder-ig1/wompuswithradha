@@ -1,10 +1,10 @@
 import java.util.Random;
 
 public class CaveSystem {
-    public Cave[] caves;
+    public Cave[] caves = new Cave[20];
     Cave wumpusLoc;
-    Cave[] pits;
-    Cave[] bats;
+    Cave[] pits = new Cave[2];
+    Cave[] bats = new Cave[2];
 
     public CaveSystem() {
         fillCaves();
@@ -14,10 +14,10 @@ public class CaveSystem {
 
     public boolean emptyCave(int loc) {
         if(wumpusLoc.getCaveNum() == loc||
-             bats[0].getCaveNum() == loc|| 
-             bats[1].getCaveNum() == loc|| 
-             pits[0].getCaveNum() == loc||
-             pits[1].getCaveNum() == loc){
+             (!(bats[0] ==null )&& bats[0].getCaveNum() == loc|| 
+             (!(bats[1] ==null )&& bats[1].getCaveNum() == loc)||
+             (!(pits[0] ==null )&& pits[0].getCaveNum() == loc||
+             (!(pits[1] ==null )&& pits[1].getCaveNum() == loc)))){
             return false;
         }
         return true;
@@ -59,8 +59,8 @@ public class CaveSystem {
     }
 
     private void fillCaves(){
-        caves = new Cave[20];
         for (int i = 0; i < 20; i++) {
+            caves[i] = new Cave();
             caves[i].setCaveSystem(this);
         }
         for (int i = 0; i < 20; i++) {
@@ -89,6 +89,12 @@ public class CaveSystem {
         caves[17].setLinkedCaves(8, 16, 18);
         caves[18].setLinkedCaves(10, 17, 19);
         caves[19].setLinkedCaves(12, 15, 18);
+    }
+
+    public void randomWumpus() {
+        Random rand = new Random();
+        int randomCave = rand.nextInt(20);
+        wumpusLoc = caves[randomCave];
     }
 }
 

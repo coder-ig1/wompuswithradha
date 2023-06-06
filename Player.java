@@ -2,13 +2,12 @@ public class Player {
     CaveSystem caveSystem;
     Cave currentCave;
     int arrows;
-    boolean gameOver;
 
-    public Player(CaveSystem caveSystem, Cave currentCave, int arrows, boolean alive) {
+    public Player(CaveSystem caveSystem, Cave currentCave) {
         this.caveSystem = caveSystem;
         this.currentCave = currentCave;
         this.arrows = 5;
-        this.gameOver = false;
+        
 
         int playerLoc = (int) (Math.random() * 20);
         while (!caveSystem.emptyCave(playerLoc)) {
@@ -16,6 +15,12 @@ public class Player {
         }
 
         currentCave = caveSystem.accessCave(playerLoc);
+    }
+    public void setRandomValidPLayerLoc(){
+        int playerLoc = (int) (Math.random() * 20);
+        while (!caveSystem.emptyCave(playerLoc)) {
+            playerLoc = (int) (Math.random() * 20);
+        }
     }
 
     private boolean isAdjacentTo(Cave loc) {
@@ -27,7 +32,7 @@ public class Player {
         return false;
     }
 
-    private void printRoomInfo() {
+    public void printRoomInfo() {
 
         currentCave.toString();
         System.out.println();
@@ -45,6 +50,11 @@ public class Player {
         }
 
         System.out.println();
+        System.out.println("You have " + arrows + " arrows left.");
+        System.out.println();
+        System.out.println("You are next to rooms " + currentCave.getAdjacentCaves()[0].getCaveNum() + ", "
+                                                    + currentCave.getAdjacentCaves()[1].getCaveNum() + ", or "
+                                                    + currentCave.getAdjacentCaves()[2].getCaveNum() + ".");
     }
 
     public void shootArrow(int roomLoc) {
@@ -55,13 +65,13 @@ public class Player {
             // if room location contains Wumpus
             if (caveSystem.wumpusLoc.equals(shotInto)) {
                 System.out.println("You killed the Wumpus! You win!");
-                gameOver = true;
+                System.exit(0);
             }
 
             // ran out of arrows and Wumpus still alive
             else if (arrows == 0) {
                 System.out.println("You ran out of arrows. Game over ☠☠☠");
-                gameOver = true;
+                System.exit(0);
             }
 
             // if room location contains a bat
@@ -75,10 +85,9 @@ public class Player {
                 }
             }
 
-             else if (???) {
+             else {
                 System.out.println("You missed the Wumpus! It woke up and moved to a random room.");
-                int newRoom = findEmptyCave();
-                cave.move(newRoom);
+                caveSystem.randomWumpus();
                 
                 //WHOOPS NEED TO DO THIS
             } 
@@ -88,29 +97,35 @@ public class Player {
         }
 
     }
-
-    public void move(int room) {
-        printRoomInfo();
-        //NEED TO DO THIS
+    public Boolean move(int roomLoc){
+        Cave moveTo = caveSystem.accessCave(roomLoc);
+        currentCave = moveTo;
+        return checkStatus();
     }
 
-    private void checkStatus() {
+    
+
+    private boolean checkStatus() {
         if (currentCave.equals(caveSystem.wumpusLoc)) {
             System.out.println("You've been eaten by the Wumpus! Game over.");
-            gameOver = true;
+            return false;
         } 
 
         else if (isAdjacentTo(caveSystem.bats[0]) || isAdjacentTo(caveSystem.bats[1])) {
-            int newRoom = findEmptyCave;
-            currentCave.move(newRoom);
+            setRandomValidPLayerLoc();
             System.out.println("A bat picked you up and transported you to a random room!");
             checkStatus();
+            return true;
         } 
 
         else if (isAdjacentTo(caveSystem.pits[0]) || isAdjacentTo(caveSystem.pits[1])) {
             System.out.println("You fell into a bottomless pit! Game over.");
-            gameOver = true;
+            return false;
         }
+            
+
+                return true;
+            
     }
 
 }

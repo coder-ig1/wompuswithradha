@@ -17,6 +17,9 @@ public class Cave {
         linkedCaves[2] = null;
         this.caveSystem = null;
     }
+    public void setCaveNum(int caveNum){
+        this.cavenum = caveNum;
+    }
 
     public void setLinkedCaves(int caveNumber, int caveNumber2, int caveNumber3) {
         linkedCaves[0] = caveSystem.accessCave(caveNumber);
