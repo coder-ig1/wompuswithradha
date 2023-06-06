@@ -1,3 +1,5 @@
+import java.util.Random;
+
 public class CaveSystem {
     public Cave[] caves;
     Cave wumpusLoc;
@@ -11,33 +13,45 @@ public class CaveSystem {
     }
 
     public boolean emptyCave(int loc) {
-        //return loc != wumpusLoc && loc != pits[0] && loc != pits[1] && loc != bats[0] && loc != bats[1];
+        if(wumpusLoc.getCaveNum() == loc||
+             bats[0].getCaveNum() == loc|| 
+             bats[1].getCaveNum() == loc|| 
+             pits[0].getCaveNum() == loc||
+             pits[1].getCaveNum() == loc){
+            return false;
+        }
         return true;
     }
 
     private void setUpCaveSystemProperties(){
 
-        int rand = (int) (Math.random()*20);
-
-        wumpusLoc = accessCave(rand);
+        wumpusLoc = caves[(int) (Math.random() * 20)];
+        //fill random caves with pits and bats such that they dont overlap
         pits = new Cave[2];
+        boolean tempbool = true;
+        while(tempbool){
+            int tempRan1 = (int) (Math.random() * 20);
+            int tempRan2 = (int) (Math.random() * 20);
+            tempbool = true;
+            if(tempRan1 != tempRan2&& emptyCave(tempRan1) && emptyCave(tempRan2)){
+                pits[0] = caves[tempRan1];
+                pits[1] = caves[tempRan2];
+                tempbool = false;
+            }
+        }
         bats = new Cave[2];
-
-        while(rand != wumpusLoc.getCaveNum()) {
-            pits[0] = accessCave(rand);
+        tempbool = true;
+        while(tempbool){
+            int tempRan1 = (int) (Math.random() * 20);
+            int tempRan2 = (int) (Math.random() * 20);
+            tempbool = true;
+            if(tempRan1 != tempRan2&& emptyCave(tempRan1) && emptyCave(tempRan2)){
+                bats[0] = caves[tempRan1];
+                bats[1] = caves[tempRan2];
+                tempbool = false;
+            }
         }
 
-        while (rand != wumpusLoc.getCaveNum() && rand != pits[0].getCaveNum()) {
-            pits[1] = accessCave(rand);
-        }
-
-        while (rand != wumpusLoc.getCaveNum() && rand != pits[0].getCaveNum() && rand != pits[1].getCaveNum()) {
-            bats[0] = accessCave(rand);
-        }
-
-        while (rand != wumpusLoc.getCaveNum() && rand != pits[0].getCaveNum() && rand != pits[1].getCaveNum() && rand != bats[0].getCaveNum()) {
-            bats[1] = accessCave(rand);
-        }
     }
 
     public Cave accessCave(int caveNumber) {
@@ -48,6 +62,9 @@ public class CaveSystem {
         caves = new Cave[20];
         for (int i = 0; i < 20; i++) {
             caves[i].setCaveSystem(this);
+        }
+        for (int i = 0; i < 20; i++) {
+            caves[i].setCaveNum(i);
         }
     }
 
