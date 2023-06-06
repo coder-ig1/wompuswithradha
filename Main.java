@@ -15,7 +15,7 @@ public class Main
       
     }
   }
-  
+
   private static void doMove(String resultOfPrompt){
     
     if(resultOfPrompt.equals("1")){
@@ -40,7 +40,7 @@ public class Main
     
   }
   private static String promptForMove(){
-    System.out.println("You are in cave ");
+    System.out.println("you are in cave "+String.valueOf(player.getCurrentCave().getCaveNum()));
     player.printRoomInfo();
     System.out.println("What would you like to do?");
     System.out.println("1. Move");

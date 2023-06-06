@@ -16,7 +16,7 @@ public class Player {
 
         currentCave = caveSystem.accessCave(playerLoc);
     }
-    
+
     public void setRandomValidPLayerLoc(){
         int playerLoc = (int) (Math.random() * 20);
 
@@ -124,6 +124,12 @@ public class Player {
             System.exit(0);
         }
             
+
         return true;
+            
     }
+     public Cave getCurrentCave(){
+        return currentCave;
+    }
+
 }
