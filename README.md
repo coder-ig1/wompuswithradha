@@ -1,7 +1,11 @@
 # Hunt the Wumpus Game
 a *wumpus* game made in Java :)
+<br>
+<br>
 Authors: Ezra Newman & Radha Munver
+<br>
 Date: June 6th, 2023
+<br>
 AP Computer Science A
 
 ### CaveSystem class
