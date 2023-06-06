@@ -21,6 +21,7 @@ public class Player {
         while (!caveSystem.emptyCave(playerLoc)) {
             playerLoc = (int) (Math.random() * 20);
         }
+        currentCave = caveSystem.accessCave(playerLoc);
     }
 
     private boolean isAdjacentTo(Cave loc) {
@@ -108,7 +109,7 @@ public class Player {
     private boolean checkStatus() {
         if (currentCave.equals(caveSystem.wumpusLoc)) {
             System.out.println("You've been eaten by the Wumpus! Game over.");
-            return false;
+            System.exit(0);
         } 
 
         else if (isAdjacentTo(caveSystem.bats[0]) || isAdjacentTo(caveSystem.bats[1])) {
@@ -120,7 +121,7 @@ public class Player {
 
         else if (isAdjacentTo(caveSystem.pits[0]) || isAdjacentTo(caveSystem.pits[1])) {
             System.out.println("You fell into a bottomless pit! Game over.");
-            return false;
+            System.exit(0);
         }
             
 

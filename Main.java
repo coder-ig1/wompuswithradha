@@ -12,6 +12,7 @@ public class Main
     while(gameOn){
       String resultOfPrompt = promptForMove();
       doMove(resultOfPrompt);
+      
     }
     
     
