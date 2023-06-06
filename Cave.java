@@ -7,7 +7,7 @@ public class Cave
 {
     Cave[] linkedCaves = new Cave[3];   // linkedCaves array to be connected to a cave linked to adjacent caves
     CaveSystem caveSystem;  // access the caveSystem structure
-    int cavenum;    // specific cave number
+    int cavenum;    // stores specific cave number
 
     // Construct a cave with its own numbers and linked with its neighbors'
     public Cave(int caveNumber, int caveNumber2, int caveNumber3, CaveSystem caveSystem, int thisCaveNum) {
