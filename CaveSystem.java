@@ -1,5 +1,5 @@
 // Hunt the Wumpus Game
-// CaveSystem Class – Sets up the cave structure
+// CaveSystem Class – Sets up the cave structure (see below for ASCII art dodecahedron structure!)
 // Authors: Ezra Newman and Radha Munver
 // Date: June 6th, 2023
 
