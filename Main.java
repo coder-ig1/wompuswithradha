@@ -13,7 +13,7 @@ public class Main
       String resultOfPrompt = promptForMove();
       doMove(resultOfPrompt);
     }
-    takeInput.close();
+    
     
   }
   private static void doMove(String resultOfPrompt){
@@ -22,19 +22,19 @@ public class Main
       System.out.println("Which room would you like to move to?");
       String input2 = takeInput.nextLine();
       int roomNum = Integer.parseInt(input2);
-      takeInput.close();
+      
       player.move(roomNum);
     }
     else if(resultOfPrompt.equals("2")){
       System.out.println("Which room would you like to shoot into?");
       String input2 = takeInput.nextLine();
       int roomNum = Integer.parseInt(input2);
-      takeInput.close();
+      
       player.shootArrow(roomNum);
     }
     else{
       System.out.println("Invalid input");
-      takeInput.close();
+      
     }
     
   }
