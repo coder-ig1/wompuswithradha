@@ -40,7 +40,7 @@ public class Main
     
   }
   private static String promptForMove(){
-    System.out.println("you are in cave");
+    System.out.println("you are in cave "+String.valueOf(player.getCurrentCave().getCaveNum()));
     player.printRoomInfo();
     System.out.println("What would you like to do?");
     System.out.print("1. Move,");
