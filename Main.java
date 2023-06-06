@@ -14,9 +14,8 @@ public class Main
       doMove(resultOfPrompt);
       
     }
-    
-    
   }
+  
   private static void doMove(String resultOfPrompt){
     
     if(resultOfPrompt.equals("1")){
@@ -51,11 +50,12 @@ public class Main
   }
   
   public static Cave findEmptyCave(CaveSystem caves){
-    for (int i = 0; i < caves.caves.length; i++){
-      if (caves.emptyCave(i)){
+    while(true){
+      int i = (int) (Math.random() * 20);
+      if(caves.emptyCave(i)){
         return caves.accessCave(i);
       }
     }
-    return null; //under normal circumstances this will never be ran 
+ //under regular circumstances this will never be ran 
   }
 }
