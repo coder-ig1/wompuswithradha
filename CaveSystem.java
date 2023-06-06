@@ -1,55 +1,74 @@
+// Hunt the Wumpus Game
+// CaveSystem Class – Sets up the cave structure
+// Authors: Ezra Newman and Radha Munver
+// Date: June 6th, 2023
+
 import java.util.Random;
 
-public class CaveSystem {
-    public Cave[] caves = new Cave[20];
-    Cave wumpusLoc;
-    Cave[] pits = new Cave[2];
-    Cave[] bats = new Cave[2];
+public class CaveSystem 
+{
+    public Cave[] caves = new Cave[20]; // generate a Cave array to contain 20 caves
+    Cave wumpusLoc; // Cave to specify location of the Wumpus
+    Cave[] pits = new Cave[2];  // len 2 array to contain the 2 pits (stored as Caves)
+    Cave[] bats = new Cave[2];  // len 2 array to contain the 2 bats (stored as Caves)
 
+    // construct the cave system with appropriate caves and properties
     public CaveSystem() {
         fillCaves();
         setUpCaveConnections();
         setUpCaveSystemProperties();
     }
 
+    // check if it's an empty cave
     public boolean emptyCave(int loc) {
-        if(wumpusLoc.getCaveNum() == loc ||
-             (!(bats[0] == null )&& bats[0].getCaveNum() == loc) || 
-             (!(bats[1] == null )&& bats[1].getCaveNum() == loc) ||
-             (!(pits[0] == null )&& pits[0].getCaveNum() == loc) ||
-             (!(pits[1] == null )&& pits[1].getCaveNum() == loc)){
-            return false;
-        }
-        return true;
+        if  (wumpusLoc.getCaveNum() == loc ||
+            (!(bats[0] == null) && bats[0].getCaveNum() == loc) || 
+            (!(bats[1] == null) && bats[1].getCaveNum() == loc) ||
+            (!(pits[0] == null) && pits[0].getCaveNum() == loc) ||
+            (!(pits[1] == null) && pits[1].getCaveNum() == loc))
+            { return false;}    // not empty!
+
+        return true;    // empty
     }
 
+    // set up the cave system properties
     private void setUpCaveSystemProperties(){
 
+        // choose random Wumpus location out of the 20 caves
         wumpusLoc = caves[(int) (Math.random() * 20)];
-        //fill random caves with pits and bats such that they don't overlap
+
+        // below: filling random caves with pits and bats such that they don't overlap
+
+        // pits setup
         pits = new Cave[2];
-        boolean tempbool = true;
-        while(tempbool){
+        boolean tempbool = true;    // temporary boolean var to check the unique cave locations chosen
+        
+        while (tempbool) {
+            // choose random initial values for the pits
             int tempRan1 = (int) (Math.random() * 20);
             int tempRan2 = (int) (Math.random() * 20);
             tempbool = true;
 
-            if(tempRan1 != tempRan2 && emptyCave(tempRan1) && emptyCave(tempRan2)){
+            // choose distinct values and set to the pit locations
+            if (tempRan1 != tempRan2 && emptyCave(tempRan1) && emptyCave(tempRan2)) {
                 pits[0] = caves[tempRan1];
                 pits[1] = caves[tempRan2];
                 tempbool = false;
             }
         }
 
+        // bats setup
         bats = new Cave[2];
         tempbool = true;
-
+        
+        // choose random initial values for the bats
         while(tempbool) {
             int tempRan1 = (int) (Math.random() * 20);
             int tempRan2 = (int) (Math.random() * 20);
             tempbool = true;
 
-            if(tempRan1 != tempRan2&& emptyCave(tempRan1) && emptyCave(tempRan2)){
+             // choose distinct values and set to the bat locations
+            if (tempRan1 != tempRan2 && emptyCave(tempRan1) && emptyCave(tempRan2)) {
                 bats[0] = caves[tempRan1];
                 bats[1] = caves[tempRan2];
                 tempbool = false;
@@ -58,11 +77,13 @@ public class CaveSystem {
 
     }
 
+    // take numerical value of cave and give the corresponding Cave object
     public Cave accessCave(int caveNumber) {
         return caves[caveNumber];
     }
 
-    private void fillCaves(){
+    // fill with the 20 caves labeled with their numbers
+    private void fillCaves() {
         for (int i = 0; i < 20; i++) {
             caves[i] = new Cave();
             caves[i].setCaveSystem(this);
@@ -73,7 +94,8 @@ public class CaveSystem {
         }
     }
 
-    private void setUpCaveConnections(){
+    // create a linked list setup for all the adjacent caves to each individual caves
+    private void setUpCaveConnections() {
         caves[0].setLinkedCaves(1, 4, 7);
         caves[1].setLinkedCaves(0, 2, 9);
         caves[2].setLinkedCaves(1, 3, 11);
@@ -96,6 +118,7 @@ public class CaveSystem {
         caves[19].setLinkedCaves(12, 15, 18);
     }
 
+    // if the Wumpus was stirred, transport it to a random other cave
     public void randomWumpus() {
         Random rand = new Random();
         int randomCave = rand.nextInt(20);
