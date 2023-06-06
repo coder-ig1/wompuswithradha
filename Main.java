@@ -50,11 +50,12 @@ public class Main
   }
   
   public static Cave findEmptyCave(CaveSystem caves){
-    for(int i = 0; i <caves.caves.length; i++ ){
+    while(true){
+      int i = (int) (Math.random() * 20);
       if(caves.emptyCave(i)){
         return caves.accessCave(i);
       }
     }
-    return null; //under regular circumstances this will never be ran 
+ //under regular circumstances this will never be ran 
   }
 }
